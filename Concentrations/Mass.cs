@@ -10,22 +10,21 @@ using System.Windows.Forms;
 
 namespace Concentrations
 {
-    public partial class Form1 : Form
+    public partial class Mass : Form
     {
-        public Form1()
+        public Mass()
         {
             InitializeComponent();
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        public void ShowModal()
         {
-            Application.Exit();
+            ShowDialog();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Mass_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Mass MassForm = new Mass();
-            MassForm.ShowDialog();
+            
         }
     }
 }
