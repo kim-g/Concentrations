@@ -129,7 +129,11 @@ namespace Concentrations
 
             Clipboard.SetText(Res.ToString());
 
+            Form1 MainForm = (Form1)this.Owner;
 
+            MainForm.Volume = volume;
+            MainForm.Mm = Mm;
+            MainForm.g = Res;
         }
     }
 }
