@@ -29,34 +29,16 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.Image1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.Image1)).BeginInit();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.Image1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Image1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // Image1
-            // 
-            this.Image1.Image = ((System.Drawing.Image)(resources.GetObject("Image1.Image")));
-            this.Image1.Location = new System.Drawing.Point(12, 12);
-            this.Image1.Name = "Image1";
-            this.Image1.Size = new System.Drawing.Size(77, 86);
-            this.Image1.TabIndex = 0;
-            this.Image1.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::Concentrations.Properties.Resources.ИОС;
-            this.pictureBox1.Location = new System.Drawing.Point(95, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(521, 86);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
             // 
             // label1
             // 
@@ -88,6 +70,7 @@
             this.button2.TabIndex = 4;
             this.button2.Text = "Фактическая концентрация";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -110,6 +93,24 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Concentrations.Properties.Resources.ИОС;
+            this.pictureBox1.Location = new System.Drawing.Point(95, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(521, 86);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
+            // Image1
+            // 
+            this.Image1.Image = ((System.Drawing.Image)(resources.GetObject("Image1.Image")));
+            this.Image1.Location = new System.Drawing.Point(12, 12);
+            this.Image1.Name = "Image1";
+            this.Image1.Size = new System.Drawing.Size(77, 86);
+            this.Image1.TabIndex = 0;
+            this.Image1.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -124,8 +125,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.Text = "Навески и концентрации";
-            ((System.ComponentModel.ISupportInitialize)(this.Image1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Image1)).EndInit();
             this.ResumeLayout(false);
 
         }

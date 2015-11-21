@@ -11,6 +11,10 @@ namespace Concentrations
 {
     public partial class Form1 : Form
     {
+        public double Volume;
+        public double Mm;
+        public double g;
+
         public Form1()
         {
             InitializeComponent();
@@ -24,7 +28,17 @@ namespace Concentrations
         private void button1_Click(object sender, EventArgs e)
         {
             Mass MassForm = new Mass();
+            MassForm.Owner = this;
             MassForm.ShowDialog();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Cons ConsForm = new Cons();
+            ConsForm.Vol.Text = Volume.ToString();
+            ConsForm.MmEdit.Text = Mm.ToString();
+            ConsForm.gEdit.Text = g.ToString();
+            ConsForm.ShowModal();
         }
     }
 }
