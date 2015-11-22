@@ -14,6 +14,8 @@ namespace Concentrations
         public double Volume;
         public double Mm;
         public double g;
+        public double Ca;
+        public int Cx;
 
         public Form1()
         {
@@ -35,6 +37,7 @@ namespace Concentrations
         private void button2_Click(object sender, EventArgs e)
         {
             Cons ConsForm = new Cons();
+            ConsForm.Owner = this;
             ConsForm.Vol.Text = Volume.ToString();
             ConsForm.MmEdit.Text = Mm.ToString();
             ConsForm.gEdit.Text = g.ToString();
