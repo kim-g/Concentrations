@@ -17,6 +17,8 @@ namespace Concentrations
             InitializeComponent();
         }
 
+        public bool TextBoxEdit = false;
+
         public void ShowModal()
         {
             try
@@ -117,6 +119,18 @@ namespace Concentrations
             MainForm.Cx = Cx;
             MainForm.Ca = Ca;
             Clipboard.SetText(Res.ToString());
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Mol_Base Mol_Base_Form = new Mol_Base();
+            string NewMm = Mol_Base_Form.GetMm();
+            if (NewMm != "@Close@") { MmEdit.Text = NewMm; };
+        }
+
+        private void Vol_TextChanged(object sender, EventArgs e)
+        {
+            if (!TextBoxEdit) { Form1.NumbersOnly(sender); };
         }
     }
 }

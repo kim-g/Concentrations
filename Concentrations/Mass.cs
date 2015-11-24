@@ -29,19 +29,7 @@ namespace Concentrations
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            TextBox textBox = (TextBox)sender;
-            int SelStart = textBox.SelectionStart;
-            int TextLength = textBox.Text.Length;
-
-            textBox.Text = Regex.Replace(textBox.Text, "[^0-9.,]", "");
-            //textBox1.Text = Regex.Replace(textBox1.Text, "[.,]", separator.ToString());
-            if (TextLength == textBox.Text.Length)
-            { textBox.SelectionStart = SelStart; }
-            else
-            {
-                textBox.SelectionStart = SelStart-1;
-            };
-
+            Form1.NumbersOnly(sender);
         }
 
         private void label7_Click(object sender, EventArgs e)
@@ -123,17 +111,43 @@ namespace Concentrations
                 return;
             };
 
-            double Res = volume * Mm * Ca * Math.Pow(10, Cx) / 1000;
+            double Res;
+            try
+            {
+                Res = volume * Mm * Ca * Math.Pow(10, Cx) / 1000;
+                ResultLabel.Text = "g = " + Res.ToString("N5") + " г.";
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка вычислений");
+                return;
+            };
 
-            ResultLabel.Text = "g = " + Res.ToString("N5") + " г.";
+            try
+            {
+                Clipboard.SetText(Res.ToString());
 
-            Clipboard.SetText(Res.ToString());
+                Form1 MainForm = (Form1)this.Owner;
 
-            Form1 MainForm = (Form1)this.Owner;
+                MainForm.Volume = volume;
+                MainForm.Mm = Mm;
+                MainForm.g = Res;
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка взаимодействия форм");
+                return;
+            }
+        }
 
-            MainForm.Volume = volume;
-            MainForm.Mm = Mm;
-            MainForm.g = Res;
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Mol_Base Mol_Base_Form = new Mol_Base();
+            string NewMm = Mol_Base_Form.GetMm();
+            if (NewMm != "@Close@")
+            {
+                MmEdit.Text = NewMm;
+            };
         }
     }
 }

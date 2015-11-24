@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace Concentrations
 {
@@ -38,10 +39,48 @@ namespace Concentrations
         {
             Cons ConsForm = new Cons();
             ConsForm.Owner = this;
+            ConsForm.TextBoxEdit = true;
             ConsForm.Vol.Text = Volume.ToString();
             ConsForm.MmEdit.Text = Mm.ToString();
-            ConsForm.gEdit.Text = g.ToString();
+            //ConsForm.gEdit.Text = g.ToString();
+            ConsForm.TextBoxEdit = false;
             ConsForm.ShowModal();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Dilution Dil = new Dilution();
+            Dil.Owner = this;
+            Dil.TextBoxEdit = true;
+            Dil.Vol.Text = Volume.ToString();
+            Dil.InCaEdit.Text = Ca.ToString();
+            Dil.InCxEdit.Text = Cx.ToString();
+            Dil.TextBoxEdit = false;
+
+            Dil.ShowDialog();
+        }
+
+        public static void NumbersOnly(object sender)
+        {
+            TextBox textBox = (TextBox)sender;
+            
+            int SelStart = textBox.SelectionStart;
+            int TextLength = textBox.Text.Length;
+
+            textBox.Text = Regex.Replace(textBox.Text, "[^0-9.,]", "");
+            //textBox1.Text = Regex.Replace(textBox1.Text, "[.,]", separator.ToString());
+            if (TextLength == textBox.Text.Length)
+            { textBox.SelectionStart = SelStart; }
+            else
+            {
+                textBox.SelectionStart = SelStart - 1;
+            };
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            About AboutForm = new About();
+            AboutForm.ShowDialog();
         }
     }
 }

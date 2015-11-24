@@ -41,6 +41,7 @@
             this.Vol = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ResultLabel
@@ -78,15 +79,16 @@
             this.gEdit.Size = new System.Drawing.Size(58, 26);
             this.gEdit.TabIndex = 26;
             this.gEdit.Text = "1";
+            this.gEdit.TextChanged += new System.EventHandler(this.Vol_TextChanged);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(13, 159);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(50, 20);
+            this.label9.Size = new System.Drawing.Size(18, 20);
             this.label9.TabIndex = 25;
-            this.label9.Text = "Конц.";
+            this.label9.Text = "g";
             // 
             // label5
             // 
@@ -104,6 +106,7 @@
             this.MmEdit.Size = new System.Drawing.Size(73, 26);
             this.MmEdit.TabIndex = 23;
             this.MmEdit.Text = "0";
+            this.MmEdit.TextChanged += new System.EventHandler(this.Vol_TextChanged);
             // 
             // label7
             // 
@@ -139,6 +142,7 @@
             this.Vol.Size = new System.Drawing.Size(73, 26);
             this.Vol.TabIndex = 19;
             this.Vol.Text = "0";
+            this.Vol.TextChanged += new System.EventHandler(this.Vol_TextChanged);
             // 
             // label2
             // 
@@ -160,11 +164,22 @@
             this.label1.Text = "Расчёт фактической концентрации по атомному весу молекулы, объёму колбы и навеске" +
     "";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(159, 111);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(38, 26);
+            this.button2.TabIndex = 33;
+            this.button2.Text = "...";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Cons
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(573, 270);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.ResultLabel);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label6);
@@ -179,8 +194,13 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Cons";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Cons";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -202,5 +222,6 @@
         public System.Windows.Forms.TextBox gEdit;
         public System.Windows.Forms.TextBox MmEdit;
         public System.Windows.Forms.TextBox Vol;
+        private System.Windows.Forms.Button button2;
     }
 }
