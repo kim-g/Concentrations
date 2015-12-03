@@ -21,48 +21,50 @@ namespace Concentrations
 
         private void LoadBase()
         {
-            XmlDocument DB = new XmlDocument();
+            XDocument xdoc;
 
             try
             {
-                DB.Load("base.xml");
+                xdoc = XDocument.Load("base.xml");
             }
             catch
             {
                 XElement element4 = new XElement("molecules");
                 element4.Save(@"base.xml");
-                DB.Load("base.xml");
+                xdoc = XDocument.Load("base.xml");
             }
-            
-
-            XmlElement xRoot = DB.DocumentElement;
 
             if (MassList != null) { MassList.Clear(); };
             listBox1.Items.Clear();
 
-            foreach (XmlNode xnode in xRoot)
+            foreach (XElement Molecule in xdoc.Element("molecules").Elements("folder"))
             {
-                if (xnode.Attributes.Count > 0)
-                {
-                    XmlNode MName = xnode.Attributes.GetNamedItem("name");
-                    XmlNode MMm = xnode.Attributes.GetNamedItem("Mm");
-                    XmlNode MFolder = xnode.Attributes.GetNamedItem("folder");
+                XAttribute nameAt = Molecule.Attribute("name");
 
-                    { 
-                        if ((MName != null) && (MMm != null))
-                            listBox1.Items.Add(MName.Value + " (" + MMm.Value + ")");
-                        MolarMass Element = new MolarMass();
-                        Element.Name = MName.Value;
-                        Element.Mm = MMm.Value;
+                MolarMass Element = new MolarMass();
+                Element.Name = nameAt.Value;
+                Element.Mm = "folder";
+                MassList.Add(Element);
 
-                        MassList.Add(Element);
-                    };
-
-                    
-                }
+                if (nameAt != null)
+                    listBox1.Items.Add("[ " + nameAt.Value + " ]");
             }
 
-            listBox1.Sorted = true;
+            foreach (XElement Molecule in xdoc.Element("molecules").Elements("molecule"))
+            {
+                XAttribute nameAt = Molecule.Attribute("name");
+                XAttribute MmAt = Molecule.Attribute("Mm");
+
+                MolarMass Element = new MolarMass();
+                Element.Name = nameAt.Value;
+                Element.Mm = MmAt.Value;
+                MassList.Add(Element);
+
+                if ((nameAt != null) && (MmAt != null))
+                    listBox1.Items.Add(nameAt.Value + " (" + MmAt.Value + ")");
+            }
+
+                listBox1.Sorted = true;
         }
 
         public string GetMm()
