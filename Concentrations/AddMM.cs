@@ -24,26 +24,12 @@ namespace Concentrations
             {
                 XDocument Base = XDocument.Load("base.xml");
 
-                Base.Add(new XElement("molecules",
-                            new XElement("molecule",
-                                new XAttribute("name", ElName))));
-                /*
-                XmlElement xRoot = Base.DocumentElement;
+                Base.Root.Add(new XElement("molecule",
+                                new XAttribute("name", ElName),
+                                new XAttribute("Mm", ElMm)));
 
-                XmlElement MmElem = Base.CreateElement("molecule");
-                XmlAttribute nameAttr = Base.CreateAttribute("name");
-                XmlAttribute MmAttr = Base.CreateAttribute("Mm");
+                Base.Save("base.xml");
 
-                XmlText nameText = Base.CreateTextNode(ElName);
-                XmlText MmText = Base.CreateTextNode(ElMm);
-
-                nameAttr.AppendChild(nameText);
-                MmAttr.AppendChild(MmText);
-
-                MmElem.Attributes.Append(nameAttr);
-                MmElem.Attributes.Append(MmAttr);
-                xRoot.AppendChild(MmElem);
-                Base.Save("base.xml");*/
             }
             return Add;
         }
