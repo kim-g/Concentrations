@@ -91,6 +91,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Mol_Base";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "База данных молекул";
             this.Load += new System.EventHandler(this.Mol_Base_Load);

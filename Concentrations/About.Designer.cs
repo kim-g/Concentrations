@@ -65,14 +65,14 @@
             this.label1.Location = new System.Drawing.Point(13, 115);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(609, 147);
+            this.label1.Size = new System.Drawing.Size(609, 190);
             this.label1.TabIndex = 2;
             this.label1.Text = resources.GetString("label1.Text");
             // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(9, 273);
+            this.linkLabel1.Location = new System.Drawing.Point(410, 235);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(137, 20);
             this.linkLabel1.TabIndex = 3;
@@ -108,7 +108,7 @@
             this.Name = "About";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "About";
+            this.Text = "О программе...";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);

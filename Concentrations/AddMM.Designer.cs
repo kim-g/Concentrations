@@ -60,14 +60,14 @@
             this.textBox1.Location = new System.Drawing.Point(105, 39);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(226, 26);
-            this.textBox1.TabIndex = 2;
+            this.textBox1.TabIndex = 0;
             // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(153, 71);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(178, 26);
-            this.textBox2.TabIndex = 4;
+            this.textBox2.TabIndex = 1;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label3
@@ -84,7 +84,7 @@
             this.button1.Location = new System.Drawing.Point(56, 105);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(95, 31);
-            this.button1.TabIndex = 5;
+            this.button1.TabIndex = 2;
             this.button1.Text = "Добавить";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -94,7 +94,7 @@
             this.button2.Location = new System.Drawing.Point(198, 105);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(95, 31);
-            this.button2.TabIndex = 6;
+            this.button2.TabIndex = 3;
             this.button2.Text = "Отмена";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -117,8 +117,9 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AddMM";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "AddMM";
+            this.Text = "Добавить элемент";
             this.ResumeLayout(false);
             this.PerformLayout();
 

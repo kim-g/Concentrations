@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
-using System.Text.RegularExpressions;
+using System.Xml.Linq;
 
 namespace Concentrations
 {
@@ -27,9 +22,12 @@ namespace Concentrations
             ShowDialog();
             if (Add)
             {
-                XmlDocument Base = new XmlDocument();
-                Base.Load("base.xml");
+                XDocument Base = XDocument.Load("base.xml");
 
+                Base.Add(new XElement("molecules",
+                            new XElement("molecule",
+                                new XAttribute("name", ElName))));
+                /*
                 XmlElement xRoot = Base.DocumentElement;
 
                 XmlElement MmElem = Base.CreateElement("molecule");
@@ -45,7 +43,7 @@ namespace Concentrations
                 MmElem.Attributes.Append(nameAttr);
                 MmElem.Attributes.Append(MmAttr);
                 xRoot.AppendChild(MmElem);
-                Base.Save("base.xml");
+                Base.Save("base.xml");*/
             }
             return Add;
         }
@@ -61,17 +59,14 @@ namespace Concentrations
             XmlDocument Base = new XmlDocument();
             Base.Load("base.xml");
             XmlElement xRoot = Base.DocumentElement;
-            foreach (XmlNode xnode in xRoot)
+            XmlNode childnode = xRoot.SelectSingleNode("molecule[@name='" + textBox1.Text + "']");
+
+            if (childnode != null)
             {
-                if (xnode.Attributes.Count > 0)
-                {
-                    if (xnode.Attributes.GetNamedItem("name").Value == textBox1.Text)
-                    {
-                        MessageBox.Show("Соединение с таким названием уже имеется.\nПожалуйста, выберите другое название.");
-                        return;
-                    };
-                }
+                MessageBox.Show("Соединение с таким названием уже имеется.\nПожалуйста, выберите другое название.");
+                return;
             };
+            
 
             char separator = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalSeparator[0];
 

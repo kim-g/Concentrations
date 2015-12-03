@@ -58,7 +58,7 @@
             this.button1.Location = new System.Drawing.Point(17, 188);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(530, 29);
-            this.button1.TabIndex = 31;
+            this.button1.TabIndex = 4;
             this.button1.Text = "Расчитать";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -77,7 +77,7 @@
             this.gEdit.Location = new System.Drawing.Point(80, 156);
             this.gEdit.Name = "gEdit";
             this.gEdit.Size = new System.Drawing.Size(58, 26);
-            this.gEdit.TabIndex = 26;
+            this.gEdit.TabIndex = 3;
             this.gEdit.Text = "1";
             this.gEdit.TextChanged += new System.EventHandler(this.Vol_TextChanged);
             // 
@@ -104,7 +104,7 @@
             this.MmEdit.Location = new System.Drawing.Point(80, 111);
             this.MmEdit.Name = "MmEdit";
             this.MmEdit.Size = new System.Drawing.Size(73, 26);
-            this.MmEdit.TabIndex = 23;
+            this.MmEdit.TabIndex = 1;
             this.MmEdit.Text = "0";
             this.MmEdit.TextChanged += new System.EventHandler(this.Vol_TextChanged);
             // 
@@ -140,7 +140,7 @@
             this.Vol.Location = new System.Drawing.Point(80, 79);
             this.Vol.Name = "Vol";
             this.Vol.Size = new System.Drawing.Size(73, 26);
-            this.Vol.TabIndex = 19;
+            this.Vol.TabIndex = 0;
             this.Vol.Text = "0";
             this.Vol.TextChanged += new System.EventHandler(this.Vol_TextChanged);
             // 
@@ -169,7 +169,7 @@
             this.button2.Location = new System.Drawing.Point(159, 111);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(38, 26);
-            this.button2.TabIndex = 33;
+            this.button2.TabIndex = 2;
             this.button2.Text = "...";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -201,7 +201,7 @@
             this.Name = "Cons";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Cons";
+            this.Text = "Расчёт концентраций";
             this.ResumeLayout(false);
             this.PerformLayout();
 

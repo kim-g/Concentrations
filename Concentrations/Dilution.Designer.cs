@@ -55,7 +55,7 @@
             this.CxEdit.Location = new System.Drawing.Point(211, 146);
             this.CxEdit.Name = "CxEdit";
             this.CxEdit.Size = new System.Drawing.Size(45, 23);
-            this.CxEdit.TabIndex = 30;
+            this.CxEdit.TabIndex = 4;
             this.CxEdit.Text = "0";
             this.CxEdit.TextChanged += new System.EventHandler(this.Vol_TextChanged);
             // 
@@ -73,7 +73,7 @@
             this.button1.Location = new System.Drawing.Point(17, 188);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(530, 29);
-            this.button1.TabIndex = 32;
+            this.button1.TabIndex = 5;
             this.button1.Text = "Расчитать";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -111,7 +111,7 @@
             this.CaEdit.Location = new System.Drawing.Point(107, 156);
             this.CaEdit.Name = "CaEdit";
             this.CaEdit.Size = new System.Drawing.Size(58, 26);
-            this.CaEdit.TabIndex = 27;
+            this.CaEdit.TabIndex = 3;
             this.CaEdit.Text = "1";
             this.CaEdit.TextChanged += new System.EventHandler(this.Vol_TextChanged);
             // 
@@ -147,7 +147,7 @@
             this.Vol.Location = new System.Drawing.Point(80, 79);
             this.Vol.Name = "Vol";
             this.Vol.Size = new System.Drawing.Size(73, 26);
-            this.Vol.TabIndex = 20;
+            this.Vol.TabIndex = 0;
             this.Vol.Text = "0";
             this.Vol.TextChanged += new System.EventHandler(this.Vol_TextChanged);
             // 
@@ -176,7 +176,7 @@
             this.InCxEdit.Location = new System.Drawing.Point(211, 108);
             this.InCxEdit.Name = "InCxEdit";
             this.InCxEdit.Size = new System.Drawing.Size(45, 23);
-            this.InCxEdit.TabIndex = 38;
+            this.InCxEdit.TabIndex = 2;
             this.InCxEdit.Text = "0";
             this.InCxEdit.TextChanged += new System.EventHandler(this.Vol_TextChanged);
             // 
@@ -213,7 +213,7 @@
             this.InCaEdit.Location = new System.Drawing.Point(107, 118);
             this.InCaEdit.Name = "InCaEdit";
             this.InCaEdit.Size = new System.Drawing.Size(58, 26);
-            this.InCaEdit.TabIndex = 35;
+            this.InCaEdit.TabIndex = 1;
             this.InCaEdit.Text = "1";
             this.InCaEdit.TextChanged += new System.EventHandler(this.Vol_TextChanged);
             // 

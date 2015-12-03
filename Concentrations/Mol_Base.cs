@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
-using System.Text.RegularExpressions;
+using System.Xml.Linq;
+
 
 namespace Concentrations
 {
@@ -25,7 +22,18 @@ namespace Concentrations
         private void LoadBase()
         {
             XmlDocument DB = new XmlDocument();
-            DB.Load("base.xml");
+
+            try
+            {
+                DB.Load("base.xml");
+            }
+            catch
+            {
+                XElement element4 = new XElement("molecules");
+                element4.Save(@"base.xml");
+                DB.Load("base.xml");
+            }
+            
 
             XmlElement xRoot = DB.DocumentElement;
 
@@ -38,13 +46,19 @@ namespace Concentrations
                 {
                     XmlNode MName = xnode.Attributes.GetNamedItem("name");
                     XmlNode MMm = xnode.Attributes.GetNamedItem("Mm");
-                    if ((MName != null) && (MMm != null))
-                        listBox1.Items.Add(MName.Value + " (" + MMm.Value + ")");
-                    MolarMass Element = new MolarMass();
-                    Element.Name = MName.Value;
-                    Element.Mm = MMm.Value;
+                    XmlNode MFolder = xnode.Attributes.GetNamedItem("folder");
 
-                    MassList.Add(Element);
+                    { 
+                        if ((MName != null) && (MMm != null))
+                            listBox1.Items.Add(MName.Value + " (" + MMm.Value + ")");
+                        MolarMass Element = new MolarMass();
+                        Element.Name = MName.Value;
+                        Element.Mm = MMm.Value;
+
+                        MassList.Add(Element);
+                    };
+
+                    
                 }
             }
 
