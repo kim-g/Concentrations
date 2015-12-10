@@ -39,15 +39,12 @@ namespace Concentrations
             if (MassList != null) { MassList.Clear(); };
             listBox1.Items.Clear();
 
-            /*XElement CurList = xdoc.Element("molecules");*/
-
             XElement CurList = xdoc.Root;
 
             if (Folder != "/")
             {
                 foreach (XElement TempElement in xdoc.Root.Elements("folder"))
                 {
-                    //MessageBox.Show(TempElement.Attribute("name").Value + " -> " + Folder);
                     if (TempElement.Attribute("name").Value == Folder)
                     {
                         CurList = TempElement;
@@ -169,7 +166,7 @@ namespace Concentrations
         private void button1_Click(object sender, EventArgs e)
         {
             AddMM AddMMForm = new AddMM();
-            if (AddMMForm.NewElement())
+            if (AddMMForm.NewElement(Folder))
             {
                 LoadBase();
             };

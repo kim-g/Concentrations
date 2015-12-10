@@ -17,16 +17,46 @@ namespace Concentrations
         private string ElName;
         private string ElMm;
 
-        public bool NewElement()
+        public bool NewElement(string Folder)
         {
             ShowDialog();
             if (Add)
             {
                 XDocument Base = XDocument.Load("base.xml");
 
-                Base.Root.Add(new XElement("molecule",
+                if (Folder == "/")
+                {
+                    Base.Root.Add(new XElement("molecule",
                                 new XAttribute("name", ElName),
                                 new XAttribute("Mm", ElMm)));
+                }
+                else
+                {
+                    XElement FoldEl = null;
+                    foreach (XElement El in Base.Root.Elements("folder"))
+                    {
+                        if (El.Attribute("name").Value == Folder)
+                        {
+                            FoldEl = El;
+                        }
+                    }
+                    if (FoldEl == null)
+                    {
+                        Base.Root.Add(new XElement("folder",
+                                new XAttribute("name", Folder)));
+                        foreach (XElement El in Base.Root.Elements("folder"))
+                        {
+                            if (El.Attribute("name").Value == Folder)
+                            {
+                                FoldEl = El;
+                            }
+                        }
+                    }
+
+                    FoldEl.Add(new XElement("molecule",
+                                        new XAttribute("name", ElName),
+                                        new XAttribute("Mm", ElMm)));
+                }
 
                 Base.Save("base.xml");
 
