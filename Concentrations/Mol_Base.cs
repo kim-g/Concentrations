@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
+using System.Linq;
 
 
 namespace Concentrations
@@ -12,6 +13,7 @@ namespace Concentrations
     {
         private List<MolarMass> MassList;
         private string Res = "";
+        private string Folder = "/";
 
         public Mol_Base()
         {
@@ -37,31 +39,60 @@ namespace Concentrations
             if (MassList != null) { MassList.Clear(); };
             listBox1.Items.Clear();
 
-            foreach (XElement Molecule in xdoc.Element("molecules").Elements("folder"))
+            /*XElement CurList = xdoc.Element("molecules");*/
+
+            XElement CurList = xdoc.Root;
+
+            if (Folder != "/")
             {
-                XAttribute nameAt = Molecule.Attribute("name");
+                foreach (XElement TempElement in xdoc.Root.Elements("folder"))
+                {
+                    //MessageBox.Show(TempElement.Attribute("name").Value + " -> " + Folder);
+                    if (TempElement.Attribute("name").Value == Folder)
+                    {
+                        CurList = TempElement;
+                    }
+                }
+
+                listBox1.Items.Add("..");
 
                 MolarMass Element = new MolarMass();
-                Element.Name = nameAt.Value;
-                Element.Mm = "folder";
+                Element.Name = "..";
+                Element.Mm = "up_folder";
                 MassList.Add(Element);
-
-                if (nameAt != null)
-                    listBox1.Items.Add("[ " + nameAt.Value + " ]");
             }
 
-            foreach (XElement Molecule in xdoc.Element("molecules").Elements("molecule"))
+            if (CurList.Element("folder") != null)
             {
-                XAttribute nameAt = Molecule.Attribute("name");
-                XAttribute MmAt = Molecule.Attribute("Mm");
+                foreach (XElement Molecule in CurList.Elements("folder"))
+                {
+                    XAttribute nameAt = Molecule.Attribute("name");
 
-                MolarMass Element = new MolarMass();
-                Element.Name = nameAt.Value;
-                Element.Mm = MmAt.Value;
-                MassList.Add(Element);
+                    MolarMass Element = new MolarMass();
+                    Element.Name = nameAt.Value;
+                    Element.Mm = "folder";
+                    MassList.Add(Element);
 
-                if ((nameAt != null) && (MmAt != null))
-                    listBox1.Items.Add(nameAt.Value + " (" + MmAt.Value + ")");
+                    if (nameAt != null)
+                        listBox1.Items.Add("[ " + nameAt.Value + " ]");
+                };
+            }
+
+            if (CurList.Element("molecule") != null)
+            {
+                foreach (XElement Molecule in CurList.Elements("molecule"))
+                {
+                    XAttribute nameAt = Molecule.Attribute("name");
+                    XAttribute MmAt = Molecule.Attribute("Mm");
+
+                    MolarMass Element = new MolarMass();
+                    Element.Name = nameAt.Value;
+                    Element.Mm = MmAt.Value;
+                    MassList.Add(Element);
+
+                    if ((nameAt != null) && (MmAt != null))
+                        listBox1.Items.Add(nameAt.Value + " (" + MmAt.Value + ")");
+                };
             }
 
                 listBox1.Sorted = true;
@@ -89,6 +120,27 @@ namespace Concentrations
         private void listBox1_DoubleClick(object sender, EventArgs e)
         {
             if (listBox1.SelectedItem == null) { return; }
+
+            foreach (MolarMass Element in MassList)
+            {
+                string ElName = "[ " + Element.Name + " ]";
+
+                if (listBox1.SelectedItem.ToString() == ElName)
+                {
+                    Folder = Element.Name;
+                    LoadBase();
+
+                    return;
+                }
+            };
+
+            if (listBox1.SelectedItem.ToString() == "..")
+            {
+                Folder = "/";
+                LoadBase();
+
+                return;
+            }
 
             foreach (MolarMass Element in MassList)
             {
@@ -122,6 +174,11 @@ namespace Concentrations
                 LoadBase();
             };
                 
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
