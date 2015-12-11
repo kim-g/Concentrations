@@ -191,6 +191,7 @@ namespace Concentrations
             do
             {
                 Input_String IS_Form = new Input_String();
+                IS_Form.Owner = this;
 
                 NewFolder = IS_Form.GetString("Создание папки", "Имя:");
 
