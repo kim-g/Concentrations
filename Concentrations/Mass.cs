@@ -137,7 +137,10 @@ namespace Concentrations
         private void button2_Click(object sender, EventArgs e)
         {
             Mol_Base Mol_Base_Form = new Mol_Base();
-            string NewMm = Mol_Base_Form.GetMm();
+            Mol_Base_Form.Owner = this;
+
+            Form1 MainForm = (Form1)this.Owner;
+            string NewMm = Mol_Base_Form.GetMm(MainForm.MM_Folder);
             if (NewMm != "@Close@")
             {
                 MmEdit.Text = NewMm;

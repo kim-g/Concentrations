@@ -95,8 +95,9 @@ namespace Concentrations
                 listBox1.Sorted = true;
         }
 
-        public string GetMm()
+        public string GetMm(string CurFolder)
         {
+            Folder = CurFolder;
             LoadBase();
             this.ShowDialog();
 
@@ -106,6 +107,8 @@ namespace Concentrations
                 return "";
             }
 
+            Form1 MainForm = (Form1)this.Owner.Owner;
+            MainForm.MM_Folder = Folder;
             return Res;
         }
 

@@ -6,11 +6,26 @@ namespace Concentrations
 {
     public partial class Form1 : Form
     {
+
         public double Volume;
         public double Mm;
         public double g;
         public double Ca;
         public int Cx;
+        private string mM_Folder = "/";
+
+        public string MM_Folder
+        {
+            get
+            {
+                return mM_Folder;
+            }
+
+            set
+            {
+                mM_Folder = value;
+            }
+        }
 
         public Form1()
         {
