@@ -17,7 +17,7 @@ namespace Concentrations
         {
             try
             {
-                Form1 MainForm = (Form1)this.Owner;
+                Form1 MainForm = (Form1)Owner;
                 
             }
             catch
@@ -104,7 +104,7 @@ namespace Concentrations
                 return;
             }
 
-            Form1 MainForm = (Form1)this.Owner;
+            Form1 MainForm = (Form1)Owner;
 
             MainForm.Volume = volume;
             MainForm.Mm = Mm;
@@ -119,7 +119,7 @@ namespace Concentrations
         {
             Mol_Base Mol_Base_Form = new Mol_Base();
             Mol_Base_Form.Owner = this;
-            Form1 MainForm = (Form1)this.Owner;
+            Form1 MainForm = (Form1)Owner;
             string NewMm = Mol_Base_Form.GetMm(MainForm.MM_Folder);
             if (NewMm != "@Close@") { MmEdit.Text = NewMm; };
         }

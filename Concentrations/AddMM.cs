@@ -72,12 +72,7 @@ namespace Concentrations
 
         private void button1_Click(object sender, EventArgs e)
         {
-            XmlDocument Base = new XmlDocument();
-            Base.Load("base.xml");
-            XmlElement xRoot = Base.DocumentElement;
-            XmlNode childnode = xRoot.SelectSingleNode("molecule[@name='" + textBox1.Text + "']");
-
-            if (childnode != null)
+            if (Mol_Base.CheckIfExists("molecule", textBox1.Text))
             {
                 MessageBox.Show("Соединение с таким названием уже имеется.\nПожалуйста, выберите другое название.");
                 return;

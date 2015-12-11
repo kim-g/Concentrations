@@ -4,7 +4,6 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
-using System.Linq;
 
 
 namespace Concentrations
@@ -39,6 +38,8 @@ namespace Concentrations
             if (MassList != null) { MassList.Clear(); };
             listBox1.Items.Clear();
 
+            button4.Visible = true;
+
             XElement CurList = xdoc.Root;
 
             if (Folder != "/")
@@ -57,6 +58,8 @@ namespace Concentrations
                 Element.Name = "..";
                 Element.Mm = "up_folder";
                 MassList.Add(Element);
+
+                button4.Visible = false;
             }
 
             if (CurList.Element("folder") != null)
@@ -99,7 +102,7 @@ namespace Concentrations
         {
             Folder = CurFolder;
             LoadBase();
-            this.ShowDialog();
+            ShowDialog();
 
             if(Res == "@No@Value@")
             {
@@ -107,7 +110,7 @@ namespace Concentrations
                 return "";
             }
 
-            Form1 MainForm = (Form1)this.Owner.Owner;
+            Form1 MainForm = (Form1)Owner.Owner;
             MainForm.MM_Folder = Folder;
             return Res;
         }
@@ -179,6 +182,51 @@ namespace Concentrations
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            string NewFolder;
+
+            do
+            {
+                Input_String IS_Form = new Input_String();
+
+                NewFolder = IS_Form.GetString("Создание папки", "Имя:");
+
+                if (NewFolder == "@Cancel@") { return; };
+
+                if (NewFolder == "")
+                {
+                    MessageBox.Show("Введите название папки");
+                    NewFolder = "@ERROR@";
+                };
+
+                if (Mol_Base.CheckIfExists("folder", NewFolder))
+                {
+                    MessageBox.Show("Папка с таким названием уже имеется.\nПожалуйста, выберите другое название.");
+                    NewFolder = "@ERROR@";
+                }
+                
+            }
+
+            while (NewFolder == "@ERROR@");
+
+            XDocument Base = XDocument.Load("base.xml");
+
+            Base.Root.Add( new XElement("folder",
+                            new XAttribute("name", NewFolder)));
+            Base.Save("base.xml");
+            LoadBase();
+        }
+
+        public static Boolean CheckIfExists(string Element, string Name)
+        {
+            XmlDocument Base = new XmlDocument();
+            Base.Load("base.xml");
+            XmlElement xRoot = Base.DocumentElement;
+            XmlNode childnode = xRoot.SelectSingleNode(Element + "[@name='" + Name + "']");
+            return childnode != null;
         }
     }
 }

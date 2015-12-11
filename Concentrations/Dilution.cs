@@ -103,7 +103,7 @@ namespace Concentrations
 
             ResultLabel.Text = "Аликвота " + Res.ToString() + " мл.";
 
-            Form1 MainForm = (Form1)this.Owner;
+            Form1 MainForm = (Form1)Owner;
             MainForm.Volume = volume;
             MainForm.Ca = InCa;
             MainForm.Cx = InCx;
