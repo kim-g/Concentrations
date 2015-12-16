@@ -82,8 +82,6 @@ namespace Concentrations
             //Ввод молярной массы
             try
             {
-                MessageBox.Show(Form1.separator.ToString(), "Separator");
-
                 Mm = Convert.ToSingle(
                     Regex.Replace(
                         Regex.Replace(MmEdit.Text, "[^0-9.,]", ""),
