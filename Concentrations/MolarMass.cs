@@ -50,11 +50,9 @@ namespace Concentrations
             {
                 try
                 {
-                    char separator = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalSeparator[0];
-
-                    mm = Regex.Replace(
+                     mm = Regex.Replace(
                             Regex.Replace(value, "[^0-9.,]", ""),
-                            "[.,]", separator.ToString());
+                            "[.,]", Form1.separator.ToString());
                 }
                 catch (FormatException)
                 {

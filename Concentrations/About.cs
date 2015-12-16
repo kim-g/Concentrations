@@ -1,7 +1,7 @@
 ﻿/****************************************************************/
 /*                                                              */
 /*         Программа для расчёта навесок и концентраций         */
-/*                          Версия 1.0                          */
+/*                          Версия 1.1                          */
 /*                     Модуль «О программе»                     */
 /*                                                              */
 /*                     Автор – Григорий Ким                     */
@@ -38,6 +38,7 @@ namespace Concentrations
         public About()
         {
             InitializeComponent();
+            VersionLabel.Text = "Версия " + Form1.Version;
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

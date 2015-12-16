@@ -1,7 +1,7 @@
 ﻿/****************************************************************/
 /*                                                              */
 /*         Программа для расчёта навесок и концентраций         */
-/*                          Версия 1.0                          */
+/*                          Версия 1.1                          */
 /*                Модуль управления базой молекул               */
 /*                                                              */
 /*                     Автор – Григорий Ким                     */
@@ -48,8 +48,19 @@ namespace Concentrations
             catch
             {
                 XElement element4 = new XElement("molecules");
-                element4.Save(@"base.xml");
-                xdoc = XDocument.Load("base.xml");
+                try
+                {
+                    element4.Save(@"base.xml");
+                    xdoc = XDocument.Load("base.xml");
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка создания файла с базой соединений.\n" +
+                        "Возможно, каталог, в котором находится программа защищён от записи. \n\n" +
+                        "Скопируйте программу в обычный каталог для работы с базой соединений",
+                        "Ошибка создания базы соединений");
+                    return;
+                }
             }
 
             if (MassList != null) { MassList.Clear(); };
@@ -165,8 +176,8 @@ namespace Concentrations
             foreach (MolarMass Element in MassList)
             {
                 string ElName = Element.Name + " (" + Element.Mm + ")";
-                char separator = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalSeparator[0];
-                string SelElName = Regex.Replace(listBox1.SelectedItem.ToString(), "[,.]", separator.ToString());
+                string SelElName = Regex.Replace(listBox1.SelectedItem.ToString(), "[,.]", 
+                    Form1.separator.ToString());
 
                 if (SelElName == ElName)
                 {

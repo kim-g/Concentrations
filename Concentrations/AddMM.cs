@@ -1,7 +1,7 @@
 ﻿/****************************************************************/
 /*                                                              */
 /*         Программа для расчёта навесок и концентраций         */
-/*                          Версия 1.0                          */
+/*                          Версия 1.1                          */
 /*              Модуль добавления молекулы в базу               */
 /*                                                              */
 /*                     Автор – Григорий Ким                     */
@@ -94,12 +94,9 @@ namespace Concentrations
                 return;
             };
             
-
-            char separator = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalSeparator[0];
-
             Add = true;
             ElName = textBox1.Text;
-            ElMm = Regex.Replace(textBox2.Text, "[.,]", separator.ToString());
+            ElMm = Regex.Replace(textBox2.Text, "[.,]", Form1.separator.ToString());
             Close();
         }
 

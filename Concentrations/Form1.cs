@@ -1,7 +1,7 @@
 ﻿/****************************************************************/
 /*                                                              */
 /*         Программа для расчёта навесок и концентраций         */
-/*                          Версия 1.0                          */
+/*                          Версия 1.1                          */
 /*                 Окно главного меню программы                 */
 /*                                                              */
 /*                     Автор – Григорий Ким                     */
@@ -24,11 +24,17 @@ namespace Concentrations
     public partial class Form1 : Form
     {
 
+        /* Константы */
+        public static char separator = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
+        public static string Version = "1.01";
+        /*************/
+
         public double Volume;
         public double Mm;
         public double g;
         public double Ca;
         public int Cx;
+
         private string mM_Folder = "/";
 
         public string MM_Folder

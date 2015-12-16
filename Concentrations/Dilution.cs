@@ -1,7 +1,7 @@
 ﻿/****************************************************************/
 /*                                                              */
 /*         Программа для расчёта навесок и концентраций         */
-/*                          Версия 1.0                          */
+/*                          Версия 1.1                          */
 /*              Модуль расчёта разбавления раствора             */
 /*                                                              */
 /*                     Автор – Григорий Ким                     */
@@ -45,15 +45,14 @@ namespace Concentrations
             double volume;
             double InCa, Ca;
             int InCx, Cx;
-            char separator = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalSeparator[0];
-
+ 
             // Объём
             try
             {
                 volume = Convert.ToSingle(
                     Regex.Replace(
                         Regex.Replace(Vol.Text, "[^0-9.,]", ""),
-                        "[.,]", separator.ToString()));
+                        "[.,]", Form1.separator.ToString()));
             }
             catch(FormatException)
             {
@@ -72,7 +71,7 @@ namespace Concentrations
                 InCa = Convert.ToSingle(
                     Regex.Replace(
                         Regex.Replace(InCaEdit.Text, "[^0-9.,]", ""),
-                        "[.,]", separator.ToString()));
+                        "[.,]", Form1.separator.ToString()));
                 InCx = 0 - Convert.ToInt32(Regex.Replace(InCxEdit.Text, "[^0-9]", ""));
             }
             catch (FormatException)
@@ -92,7 +91,7 @@ namespace Concentrations
                 Ca = Convert.ToSingle(
                     Regex.Replace(
                         Regex.Replace(CaEdit.Text, "[^0-9.,]", ""),
-                        "[.,]", separator.ToString()));
+                        "[.,]", Form1.separator.ToString()));
                 Cx = 0 - Convert.ToInt32(Regex.Replace(CxEdit.Text, "[^0-9]", ""));
             }
             catch (FormatException)

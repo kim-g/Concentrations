@@ -59,7 +59,6 @@ namespace Concentrations
             double Mm;
             double Ca;
             double Cx;
-            char separator = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalSeparator[0];
 
             //Ввод объёма
             try
@@ -67,7 +66,7 @@ namespace Concentrations
                 volume = Convert.ToSingle(
                     Regex.Replace(
                         Regex.Replace(Vol.Text, "[^0-9.,]", ""), 
-                        "[.,]", separator.ToString()));
+                        "[.,]", Form1.separator.ToString()));
             }
             catch (FormatException)
             {
@@ -83,10 +82,12 @@ namespace Concentrations
             //Ввод молярной массы
             try
             {
+                MessageBox.Show(Form1.separator.ToString(), "Separator");
+
                 Mm = Convert.ToSingle(
                     Regex.Replace(
                         Regex.Replace(MmEdit.Text, "[^0-9.,]", ""),
-                        "[.,]", separator.ToString()));
+                        "[.,]", Form1.separator.ToString()));
             }
             catch (FormatException)
             {
@@ -105,11 +106,11 @@ namespace Concentrations
                 Ca = Convert.ToSingle(
                     Regex.Replace(
                         Regex.Replace(CaEdit.Text, "[^0-9.,]", ""),
-                        "[.,]", separator.ToString()));
+                        "[.,]", Form1.separator.ToString()));
                 Cx = 0 - Convert.ToSingle(
                     Regex.Replace(
                         Regex.Replace(CxEdit.Text, "[^0-9.,]", ""),
-                        "[.,]", separator.ToString()));
+                        "[.,]", Form1.separator.ToString()));
             }
             catch (FormatException)
             {

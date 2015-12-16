@@ -1,7 +1,7 @@
 ﻿/****************************************************************/
 /*                                                              */
 /*         Программа для расчёта навесок и концентраций         */
-/*                          Версия 1.0                          */
+/*                          Версия 1.1                          */
 /*      Модуль расчёта фактической концентрации по навеске      */
 /*                                                              */
 /*                     Автор – Григорий Ким                     */
@@ -52,14 +52,13 @@ namespace Concentrations
             double volume;
             double Mm;
             double g;
-            char separator = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalSeparator[0];
 
             try
             {
                 volume = Convert.ToSingle(
                     Regex.Replace(
                         Regex.Replace(Vol.Text, "[^0-9.,]", ""),
-                        "[.,]", separator.ToString()));
+                        "[.,]", Form1.separator.ToString()));
             }
             catch (FormatException)
             {
@@ -77,7 +76,7 @@ namespace Concentrations
                 Mm = Convert.ToSingle(
                     Regex.Replace(
                         Regex.Replace(MmEdit.Text, "[^0-9.,]", ""),
-                        "[.,]", separator.ToString()));
+                        "[.,]", Form1.separator.ToString()));
             }
             catch (FormatException)
             {
@@ -95,7 +94,7 @@ namespace Concentrations
                 g = Convert.ToSingle(
                     Regex.Replace(
                         Regex.Replace(gEdit.Text, "[^0-9.,]", ""),
-                        "[.,]", separator.ToString()));
+                        "[.,]", Form1.separator.ToString()));
             }
             catch (FormatException)
             {
