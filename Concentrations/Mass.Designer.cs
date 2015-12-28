@@ -119,7 +119,6 @@
             this.label7.Size = new System.Drawing.Size(35, 20);
             this.label7.TabIndex = 5;
             this.label7.Text = "Mm";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // label6
             // 
@@ -129,7 +128,6 @@
             this.label6.Size = new System.Drawing.Size(272, 20);
             this.label6.TabIndex = 12;
             this.label6.Text = "Желаемая концентрация  (Моль/л)";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label8
             // 
@@ -239,7 +237,6 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Навеска";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Mass_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

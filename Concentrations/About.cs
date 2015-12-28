@@ -18,16 +18,21 @@
 
 using System;
 using System.Diagnostics;
-using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace Concentrations
 {
-    public partial class About : Form
+    public partial class About : Form  //Окно «О программе»
     {
+        // константы.
+        // Автор
         private const string Author = "Grigory A. Kim";
+        // Организация
         private const string Organization = "Institute of Organic Synthesis UB RAS, Ekaterinburg, Russia";
+        // Годы действия лицензии
         private const string Year = "2015";
+        // Сама лицензия
         private const string BSD_License = "Copyright (c) <YEAR>, <OWNER>. All rights reserved.\n\n" +
                                            "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n\n"+
                                            "Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n\n" +
@@ -38,34 +43,35 @@ namespace Concentrations
         public About()
         {
             InitializeComponent();
-            VersionLabel.Text = "Версия " + Form1.Version;
+            VersionLabel.Text = "Версия " + Form1.Version;  //Пишем номер версии (Константа Form1)
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("mailto:kim-g@ios.uran.ru");
+            Process.Start("mailto:kim-g@ios.uran.ru");      //Открываем почту по умолчанию, письмо мне ;-)
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Close();
+            Close();                                        // Закрываем окно
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string TextToShow = Regex.Replace(
+            //Формируем текст лицензии, заменяя места для вставки на константы
+            string TextToShow = Regex.Replace(      
                                                 Regex.Replace(
                                                                 Regex.Replace( 
                                                                                 BSD_License, "<ORGANIZATION>", Organization
                                                                               ) , "<YEAR>", Year
                                                               ), "<OWNER>", Author + ", " + Organization
                                               );
-            MessageBox.Show(TextToShow,"BSD License");
+            MessageBox.Show(TextToShow,"BSD License");      // ...и выводим его
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://kim-g.ru/concentrations");
+            Process.Start("http://kim-g.ru/concentrations");    //Переходим на страницу скачивания.
         }
     }
 }
