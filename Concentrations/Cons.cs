@@ -23,16 +23,25 @@ namespace Concentrations
 {
     public partial class Cons : Form  //Окно расчёта фактической концентрации
     {
+        MolInfo GenInfo;
+
         public Cons()
         {
             InitializeComponent();
         }
 
-        public bool TextBoxEdit = false;    // Флаг. Внешнее окно производит редактирование полей ввода. 
+        bool TextBoxEdit = false;    // Флаг. Внешнее окно производит редактирование полей ввода. 
 
-        public void ShowModal()             // Инициализация окна и вывод в модальном режиме.
+        public MolInfo ShowDialog(MolInfo Info)             // Инициализация окна и вывод в модальном режиме.
         {
-            ShowDialog();                   // Ничего инициализировать не надо, просто выведем окно
+            GenInfo = Info;
+            TextBoxEdit = true;
+            Vol.Text = Info.Volume.ToString();
+            MmEdit.Text = Info.Mm.ToString();
+            gEdit.Text = Info.g.ToString();
+            TextBoxEdit = false;
+            base.ShowDialog();                          // Выведем окно
+            return GenInfo;
         }
 
         private void button1_Click(object sender, EventArgs e)  // Пользователь нажал на кнопку «Расчитать»
@@ -107,24 +116,20 @@ namespace Concentrations
                 MessageBox.Show("Ошибка вычислений!");  // Сообщаем об этом
                 return;                                 // ...и прекращаем процедуру
             }
-
-            Form1 MainForm = (Form1)Owner;              // Обращаемся к родительской форме
-                                                        // ...и посылаем туда итоговые данные об:
-            MainForm.Volume = volume;                   // - объёме колбы
-            MainForm.Mm = Mm;                           // - молярной массе
+                                                        // Посылаем обратно итоговые данные об:
+            GenInfo.Volume = volume;                    // - объёме колбы
+            GenInfo.Mm = Mm;                            // - молярной массе
             int Cx = (int)Math.Ceiling(Math.Log10(Res)) - 1;    // Вычисляем множитель
             double Ca = Res / Math.Pow(10, Cx);         // и степень 10 для концентрации
-            MainForm.Cx = Cx;                           // Посылаем это родительской форме
-            MainForm.Ca = Ca;
+            GenInfo.Cx = Cx;                            // Посылаем это родительской форме
+            GenInfo.Ca = Ca;
             Clipboard.SetText(Res.ToString());          // и в буфер обмена
         }
 
         private void button2_Click(object sender, EventArgs e)      // Если пользователь запросил Mm из базы
         {
             Mol_Base Mol_Base_Form = new Mol_Base();                // Создаём новое окно базы
-            Mol_Base_Form.Owner = this;                             // Становимся его родителем
-            Form1 MainForm = (Form1)Owner;                          // Определяем своего родителя
-            string NewMm = Mol_Base_Form.GetMm(MainForm.MM_Folder); // Запрашиваем значение из базы
+            string NewMm = Mol_Base_Form.GetMm(GenInfo);  // Запрашиваем значение из базы
             if (NewMm != "@Close@") { MmEdit.Text = NewMm; };       // Если пользователь не отменил, то выводим результат
         }
 

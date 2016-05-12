@@ -23,19 +23,30 @@ namespace Concentrations
 {
     public partial class Mass : Form
     {
-        public Mass()
+        MolInfo GenInfo;
+        bool TextBoxEdit = false;    // Флаг. Внешнее окно производит редактирование полей ввода. 
+
+        public Mass(MolInfo Info)
         {
             InitializeComponent();
+            TextBoxEdit = true;
+            Vol.Text = Info.Volume.ToString();
+            MmEdit.Text = Info.Mm.ToString();
+            CaEdit.Text = Info.Ca.ToString();
+            CxEdit.Text = Info.Cx.ToString();
+            TextBoxEdit = false;
         }
 
-        public void ShowModal() //Подготовить и показать окно модально
+        public MolInfo ShowDialog(MolInfo Info) //Подготовить и показать окно модально
         {
-            ShowDialog();   // Готовить не надо, только покажем
+            GenInfo = Info;
+            base.ShowDialog();   // Готовить не надо, только покажем
+            return GenInfo;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)   // При изменении текста
         {
-            Form1.NumbersOnly(sender);  // Оставить только цифры и десятичный разделитель
+            if (!TextBoxEdit) { Form1.NumbersOnly(sender); };       //Оставляем только числа и знак десятичного разделителя.
         }
 
         private void button1_Click(object sender, EventArgs e)  // При нажатии на кнопку «Расчитать»
@@ -119,12 +130,10 @@ namespace Concentrations
             try
             {
                 Clipboard.SetText(Res.ToString());      // Выдаём в буфер обмена
-
-                Form1 MainForm = (Form1)Owner;          // Обращаемся к родительской форме
-                                                        // ...и посылаем туда итоговые данные об:
-                MainForm.Volume = volume;               // - объёме колбы
-                MainForm.Mm = Mm;                       // - молярной массе
-                MainForm.g = Res;                       // - навеске
+                                                        // ...и посылаем обратно итоговые данные об:
+                GenInfo.Volume = volume;                // - объёме колбы
+                GenInfo.Mm = Mm;                       // - молярной массе
+                GenInfo.g = Res;                       // - навеске
             }
             catch       // В случае какой-либо ошибки
             {
@@ -136,10 +145,8 @@ namespace Concentrations
         private void button2_Click(object sender, EventArgs e)  // Если пользователь запросил Mm из базы
         {
             Mol_Base Mol_Base_Form = new Mol_Base();            // Создаём новое окно базы
-            Mol_Base_Form.Owner = this;                         // Становимся его родителем
 
-            Form1 MainForm = (Form1)Owner;                      // Определяем своего родителя
-            string NewMm = Mol_Base_Form.GetMm(MainForm.MM_Folder); // Запрашиваем значение из базы
+            string NewMm = Mol_Base_Form.GetMm(GenInfo); // Запрашиваем значение из базы
             if (NewMm != "@Close@")                             // Если пользователь не отменил
             {
                 MmEdit.Text = NewMm;                            //... то выводим результат

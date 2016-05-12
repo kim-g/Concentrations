@@ -91,6 +91,7 @@
       <DependentUpon>Mass.cs</DependentUpon>
     </Compile>
     <Compile Include="MolarMass.cs" />
+    <Compile Include="MolInfo.cs" />
     <Compile Include="Mol_Base.cs">
       <SubType>Form</SubType>
     </Compile>

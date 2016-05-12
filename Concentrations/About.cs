@@ -31,7 +31,7 @@ namespace Concentrations
         // Организация
         private const string Organization = "Institute of Organic Synthesis UB RAS, Ekaterinburg, Russia";
         // Годы действия лицензии
-        private const string Year = "2015";
+        private string Year = "2015-" + DateTime.Now.Year.ToString();
         // Сама лицензия
         private const string BSD_License = "Copyright (c) <YEAR>, <OWNER>. All rights reserved.\n\n" +
                                            "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n\n"+
@@ -43,6 +43,7 @@ namespace Concentrations
         public About()
         {
             InitializeComponent();
+            label1.Text = Regex.Replace(label1.Text, "<YEAR>", DateTime.Now.Year.ToString());
             VersionLabel.Text = "Версия " + Form1.Version;  //Пишем номер версии (Константа Form1)
         }
 

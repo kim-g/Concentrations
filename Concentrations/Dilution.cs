@@ -23,9 +23,25 @@ namespace Concentrations
 {
     public partial class Dilution : Form  // Окно расчёта разбавлений
     {
+        MolInfo GenInfo;
+
         public Dilution()
         {
             InitializeComponent();
+        }
+
+        public MolInfo ShowDialog(MolInfo Info)
+        {
+            TextBoxEdit = true;
+            GenInfo = Info;
+            Vol.Text = Info.Volume.ToString();
+            InCaEdit.Text = Info.Ca.ToString();
+            InCxEdit.Text = Info.Cx.ToString();
+            CaEdit.Text = Info.OutCa.ToString();
+            CxEdit.Text = Info.OutCx.ToString();
+            TextBoxEdit = false;
+            base.ShowDialog();
+            return GenInfo;
         }
 
         public bool TextBoxEdit = false;  // Флаг. Внешнее окно производит редактирование полей ввода.
@@ -114,10 +130,12 @@ namespace Concentrations
 
             ResultLabel.Text = "Аликвота " + Res.ToString() + " мл.";   // Выводим результат
 
-            Form1 MainForm = (Form1)Owner;      // Обращаемся к родительской форме и посылаем туда итоговые данные об:
-            MainForm.Volume = volume;           // - объёме колбы
-            MainForm.Ca = InCa;                 // - Исходной концентрации
-            MainForm.Cx = InCx;
+            // Посылаем обратно итоговые данные об:
+            GenInfo.Volume = volume;            // - объёме колбы
+            GenInfo.Ca = InCa;                  // - Исходной концентрации
+            GenInfo.Cx = InCx;
+            GenInfo.OutCa = Ca;                  // - Желаемой концентрации
+            GenInfo.OutCx = Cx;
         }
     }
 }

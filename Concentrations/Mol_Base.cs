@@ -127,9 +127,9 @@ namespace Concentrations
                                                 // Папки будут в начале, потому что в списке они называются на "["
         }
 
-        public string GetMm(string CurFolder)   // Получение молярной массы из базы
+        public string GetMm(MolInfo Info)   // Получение молярной массы из базы
         {
-            Folder = CurFolder;                 // Устанавливаем текщую папку
+            Folder = Info.MM_Folder;                 // Устанавливаем текщую папку
             LoadBase();                         // Загружаем базу
             ShowDialog();                       // .. и показываем окно модально
 
@@ -141,8 +141,7 @@ namespace Concentrations
                 return "";                      // Передать пустую строку
             }
 
-            Form1 MainForm = (Form1)Owner.Owner;        // Определить главную форму /* Исправить на более универсальное */
-            MainForm.MM_Folder = Folder;                // И назначить текщую папку для главной формы
+            Info.MM_Folder = Folder;                 // И назначить текщую папку для главной формы
             return Res;                                 // Вернуть результат
         }
 
