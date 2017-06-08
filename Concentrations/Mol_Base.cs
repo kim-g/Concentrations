@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
@@ -30,11 +31,33 @@ namespace Concentrations
         private List<MolarMass> MassList;       // Массив молекул
         private string Res = "";                // Результат
         private string Folder = "/";            // Папка БД
+        public static string FileDB = "base.xml";      // Файл с БД
 
         public Mol_Base()
         {
             InitializeComponent();
             MassList = new List<MolarMass>();   // Создать новый массив
+
+            //Создаём и/или подключаем БД
+            string FN = Path.Combine(Environment.GetFolderPath(
+                Environment.SpecialFolder.ApplicationData), "Concentrations/config.xml");
+            CreateDir(Path.Combine(Environment.GetFolderPath(
+                Environment.SpecialFolder.ApplicationData), "Concentrations"));
+            if (File.Exists(FN))
+                FileDB = Config.LoadFromXML(FN).DataBaseFile;
+            else
+            {
+                Config config = new Config();
+                config.DataBaseFile = FileDB;
+                config.SaveToXML(FN);
+            }
+
+            // Backup каждый месяц
+            string FileName = "Concentrations/Backup_" + DateTime.Now.Year + "-" + DateTime.Now.Month + ".xml";
+            FN = Path.Combine(Environment.GetFolderPath(
+                Environment.SpecialFolder.ApplicationData), FileName);
+            if (!File.Exists(FN))
+                File.Copy(FileDB, FN);
         }
 
         private void LoadBase()     // Загрузка БД
@@ -43,15 +66,15 @@ namespace Concentrations
 
             try   // Попытка
             {
-                xdoc = XDocument.Load("base.xml");  // ... загрузить её из файла base.xml
+                xdoc = XDocument.Load(FileDB);  // ... загрузить её из файла base.xml
             }
             catch   // Если не получается, то, наверное, файла нет, создадим новый
             {
                 XElement element4 = new XElement("molecules");  // Добавим раздел <molecules />
                 try     // Попробуем сохраниться и прочитать заново
                 {
-                    element4.Save(@"base.xml");
-                    xdoc = XDocument.Load("base.xml");
+                    element4.Save(FileDB);
+                    xdoc = XDocument.Load(FileDB);
                 }
                 catch   // Если не получилось, наверное, нет прав на запись
                 {
@@ -238,17 +261,32 @@ namespace Concentrations
 
             Base.Root.Add( new XElement("folder",
                             new XAttribute("name", NewFolder)));    //Добавить папку с нужным именем
-            Base.Save("base.xml");                          // Сохранить результат
+            Base.Save(FileDB);                          // Сохранить результат
             LoadBase();                                     // Перезагрузить базу
         }
 
         public static Boolean CheckIfExists(string Element, string Name)    // Проверить, есть ли элемент в базе
         {
             XmlDocument Base = new XmlDocument();       // Создать базу
-            Base.Load("base.xml");                      // Открыть из файла
+            Base.Load(FileDB);                      // Открыть из файла
             XmlElement xRoot = Base.DocumentElement;    // Перейти в корневой каталог
             XmlNode childnode = xRoot.SelectSingleNode(Element + "[@name='" + Name + "']"); // Запросить конкретный элемент
             return childnode != null;                   // Вернуть true, если элемент существует
+        }
+
+        private void CreateDir(string DirName)
+        {
+            try
+            {
+                if (!Directory.Exists(DirName))
+                {
+                    Directory.CreateDirectory(DirName);
+                }
+            }
+            catch (Exception ex)
+            {
+                // handle them here
+            }
         }
     }
 }

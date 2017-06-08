@@ -72,7 +72,7 @@ namespace Concentrations
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://kim-g.ru/concentrations");    //Переходим на страницу скачивания.
+            Process.Start("https://github.com/kim-g/Concentrations");    //Переходим на страницу скачивания.
         }
     }
 }

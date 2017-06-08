@@ -38,7 +38,7 @@ namespace Concentrations
             ShowDialog();               // Вывести форму
             if (Add)                    //Если пользователь нажал на OK
             {
-                XDocument Base = XDocument.Load("base.xml");        //Открываем БД
+                XDocument Base = XDocument.Load(Mol_Base.FileDB);        //Открываем БД
 
                 if (Folder == "/")                                  // Если мы находимся в корневом каталоге
                 {
@@ -74,7 +74,7 @@ namespace Concentrations
                                         new XAttribute("Mm", ElMm)));
                 }
 
-                Base.Save("base.xml");                              // Сохраняемся ;-)
+                Base.Save(Mol_Base.FileDB);                              // Сохраняемся ;-)
 
             }
             return Add;                                             // В любом случае возвращаем, чего хотел пользователь.

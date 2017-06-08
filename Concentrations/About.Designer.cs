@@ -108,10 +108,10 @@
             this.linkLabel2.AutoSize = true;
             this.linkLabel2.Location = new System.Drawing.Point(15, 216);
             this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(174, 20);
+            this.linkLabel2.Size = new System.Drawing.Size(289, 20);
             this.linkLabel2.TabIndex = 6;
             this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "kim-g.ru/concentrations";
+            this.linkLabel2.Text = "https://github.com/kim-g/Concentrations";
             this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
             // VersionLabel
