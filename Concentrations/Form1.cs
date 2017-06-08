@@ -1,7 +1,7 @@
 ﻿/****************************************************************/
 /*                                                              */
 /*         Программа для расчёта навесок и концентраций         */
-/*                          Версия 1.1                          */
+/*                          Версия 1.3                          */
 /*                 Окно главного меню программы                 */
 /*                                                              */
 /*                     Автор – Григорий Ким                     */
@@ -27,7 +27,7 @@ namespace Concentrations
         MolInfo Info = new MolInfo();
         /* Константы */
         public static char separator = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
-        public static string Version = "1.02";
+        public static string Version = "1.03";
         /*************/
 
         public Form1()
